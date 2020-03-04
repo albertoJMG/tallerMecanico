@@ -22,7 +22,7 @@
             <input type="text" name="apellidos" id="apellidos"  required>
             <br>
             <label for="dni">DNI</label>
-            <input type="text" name="dni" id="dni">
+            <input type="text" name="dni" id="dni" maxlength="9">
             <br>
             <label for="email">Email</label>
             <input type="email" name="email" id="email">

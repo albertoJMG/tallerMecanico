@@ -260,7 +260,7 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th class="col-1">ID Actuacion</th>
-                                        <th class="col-6">Descripcion</th>
+                                        <th class="col-6">Comentarios Mecánico</th>
                                         <th class="col-2">Profesional asignado</th>
                                         <th class="col-1">Inicio</th>
                                         <th class="col-1">Autorizada</th>

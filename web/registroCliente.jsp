@@ -21,7 +21,7 @@
                     <input type="text" name="apellidos" id="apellidos" class="form-control" required>
                     <br>
                     <label for="dni"><fmt:message bundle="${mensajes}" key="idCliente"/></label>
-                    <input type="text" name="dni" id="dni" class="form-control" required>
+                    <input type="text" name="dni" id="dni" class="form-control" required maxlength="9">
                     <br>
                     <label for="email">Email</label>
                     <input type="email" name="email" id="email" class="form-control" required>

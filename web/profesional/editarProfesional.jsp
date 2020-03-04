@@ -44,7 +44,7 @@
                     <input type="text" name="apellidos" id="apellidos"  value="${p.apellidos}" class="form-control" required>
 
                     <label for="dni">DNI</label>
-                    <input type="text" name="dni" id="dni" value="${p.dni}" class="form-control" required>
+                    <input type="text" name="dni" id="dni" value="${p.dni}" class="form-control" required maxlength="9">
 
                     <label for="email">Email</label>
                     <input type="email" name="email" id="email" value="${p.email}" class="form-control" required>
@@ -59,7 +59,7 @@
                     <select name="especialidad" id="especialidad" class="form-control" required>
                         <option value="Motor" ${p.especialidad == "Motor"?"selected":""}>Motor</option>
                         <option value="Electricidad" ${p.especialidad == "Electricidad"?"selected":""}>Electricidad</option>
-                        <option value="Chapa Y Pintura" ${p.especialidad == "Chapa Y Pintura"?"selected":""}>Chapa y pintura</option>
+                        <option value="Chapa y Pintura" ${p.especialidad == "Chapa y Pintura"?"selected":""}>Chapa y pintura</option>
                     </select>
 
                     <p>Situacion</p>

@@ -4,7 +4,9 @@
  */
 package modelo;
 
-import java.util.Date;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -61,6 +63,21 @@ public class Taller {
         }
         em.close();
         return p;
+    }
+
+    //No usado
+    public String codificarSHA256(String mensaje) throws NoSuchAlgorithmException {
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        byte[] hash = digest.digest(mensaje.getBytes(StandardCharsets.UTF_8));
+        StringBuffer hexString = new StringBuffer();
+        for (int i = 0; i < hash.length; i++) {
+            String hex = Integer.toHexString(hash[i] & 0xff);
+            if (hex.length() == 1) {
+                hexString.append("0");
+            }
+            hexString.append(hex);
+        }
+        return hexString.toString();
     }
 
     // Metodos de creacion de las distintas entidades
@@ -159,27 +176,27 @@ public class Taller {
         Actuacion a = ejc.findActuacion(id);
         return a;
     }
-    
+
     public boolean buscarClientePorUsuario(String nombreUsuario) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(PU);
         ClienteJpaController ejc = new ClienteJpaController(emf);
         boolean existe = false;
         List<Cliente> clientes = ejc.findClienteEntities();
-        for(int i = 0; i<clientes.size() && !existe ; i++){
-            if(clientes.get(i).getNombreUsuario().equals(nombreUsuario)){
+        for (int i = 0; i < clientes.size() && !existe; i++) {
+            if (clientes.get(i).getNombreUsuario().equals(nombreUsuario)) {
                 existe = true;
             }
         }
         return existe;
     }
-    
+
     public boolean buscarProfesionalPorUsuario(String nombreUsuario) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(PU);
         ProfesionalJpaController ejc = new ProfesionalJpaController(emf);
         boolean existe = false;
         List<Profesional> profesionales = ejc.findProfesionalEntities();
-        for(int i = 0; i<profesionales.size() && !existe ; i++){
-            if(profesionales.get(i).getNombreUsuario().equals(nombreUsuario)){
+        for (int i = 0; i < profesionales.size() && !existe; i++) {
+            if (profesionales.get(i).getNombreUsuario().equals(nombreUsuario)) {
                 existe = true;
             }
         }
@@ -215,7 +232,7 @@ public class Taller {
         List<Reparacion> r = null;
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(PU);
         EntityManager em = emf.createEntityManager();
-        String jpql = "SELECT r FROM Reparacion r WHERE r.fechaTerminacion = '"+fecha+"'";
+        String jpql = "SELECT r FROM Reparacion r WHERE r.fechaTerminacion = '" + fecha + "'";
         Query query = em.createQuery(jpql);
         r = query.getResultList();
         em.close();
@@ -244,7 +261,7 @@ public class Taller {
         em.close();
         return p;
     }
-    
+
     public List<Actuacion> getTodasActuaciones() {
         List<Actuacion> a = null;
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(PU);
@@ -280,13 +297,13 @@ public class Taller {
         ActuacionJpaController ejc = new ActuacionJpaController(emf);
         ejc.edit(a);
     }
-    
+
     public void actualizarVehiculo(Vehiculo v) throws Exception {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(PU);
         VehiculoJpaController ejc = new VehiculoJpaController(emf);
         ejc.edit(v);
     }
-    
+
     public void actualizarCliente(Cliente c) throws Exception {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(PU);
         ClienteJpaController ejc = new ClienteJpaController(emf);
